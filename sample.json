@@ -1,0 +1,14 @@
+{
+    "response":{ 
+        "language":"eng",
+        "languageIsReliable":true,
+        "entities":[{
+            "id":0,
+            "type": ["Agent","Organisation","PoliticalParty"],
+            "matchingTokens":[2],
+            "entityId":"Republican Party (United States)",
+            "freebaseTypes":["/book/book_subject","/government/political_party","/organization/membership_organization","/business/employer","/organization/organization","/government/election_campaign"],
+            "confidenceScore":6.227,
+            "wikiLink":"http://en.wikipedia.org/wiki/Republican_Party_(United_States)",
+            "matchedText":"GOP","freebaseId":"/m/07wbk","relevanceScore":0.07184,
+            "entityEnglishId":"Republican Party (United States)","startingPos":9,"endingPos":12,"wikidataId":"Q29468"},{"id":1,"type":["Agent","Person"],"matchingTokens":[4,5],"entityId":"Donald Trump","freebaseTypes":["/tv/tv_producer","/architecture/architectural_structure_owner","/celebrities/celebrity","/award/award_nominee","/symbols/name_source","/organization/organization_founder","/book/author","/book/book_subject","/film/person_or_entity_appearing_in_film","/tv/tv_program_guest","/tv/tv_personality","/film/actor","/tv/tv_program_creator","/people/measured_person","/business/board_member","/people/person","/award/award_winner","/tv/tv_actor"],"confidenceScore":4.795,"wikiLink":"http://en.wikipedia.org/wiki/Donald_Trump","matchedText":"Donald Trump","freebaseId":"/m/0cqt90","relevanceScore":0.09166,"entityEnglishId":"Donald Trump","startingPos":21,"endingPos":33,"wikidataId":"Q22686"}]},"time":0.006907,"ok":true}
