@@ -1,24 +1,5 @@
-var notifier = require('mail-notifier')
-	, helper = require('./helper')
+var helper = require('./helper')
 	, mailer = require('./mailer');
-
-var imap = {
-      user: process.env.SKIMM_EMAIL,
-      password: process.env.SKIMM_PASSWORD,
-      host: "imap.gmail.com",
-      port: 993,
-      tls: true,
-      tlsOptions: { rejectUnauthorized: false }
-};
-
-console.log("Server.js Loaded");
-
-notifier(imap).on('mail',function (mail){
-  console.log("Emai Received"); 
-  console.log("From: " , mail.from);
-  var url = getBrowserUrl(mail.text.toString());
-  generateAndSendEmail(url);
-}).start();
 
 function getBrowserUrl (text) {
   var raw = text.match(/View it in your browser.(\n)*.+?(?=>)/i);
@@ -32,17 +13,24 @@ function getBrowserUrl (text) {
   return url;
 }
 
-function generateAndSendEmail(url) { 
-	console.log("Got URL, Initiating Script")
-	helper.parseHtml(url, function (json) {
-		console.log("HTML Parsed");
-		var subject = "theSkimmSkimm for " + getDate();
-		var body = generateHtmlEmail(json); 
-		mailer.sendEmail(subject, body, function (response) {
-			console.log("Digest " + response); 
+function generateAndSendEmail(text) {
+	var url = getBrowserUrl(text); 
+	if (url) {
+		console.log("Got URL, Initiating Script")
+		helper.parseHtml(url, function (json) {
+			console.log("HTML Parsed");
+			var subject = "theSkimmSkimm for " + getDate();
+			var body = generateHtmlEmail(json); 
+			mailer.sendEmail(subject, body, function (response) {
+				console.log("Digest " + response); 
+			});
 		});
-	});
+	} else {
+		console.log("Unable to Find Url");
+	}
 }
+
+exports.generateAndSendEmail = generateAndSendEmail; 
 
 function generateHtmlEmail (input) {
 	console.log("Generating Email"); 

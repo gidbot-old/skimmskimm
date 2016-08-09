@@ -10,8 +10,16 @@ server.addListener('request', function(req, res) {
     mailparser.on("end", function(mail_object) {
       console.log("Mail Received");
       console.log("From:", mail_object.from); //[{address:'sender@example.com',name:'Sender Name'}]
-      console.log("Subject:", mail_object.subject); // Hello world!
-      console.log("Text body:", mail_object.text);
+      var address = mail_object.from[0].address; 
+      if (address == "gideonbrosenthal@gmail.com" || "theskimmskimm@gmail.com") {
+        console.log("Subject:", mail_object.subject); // Hello world!
+        console.log("Text body:", );
+
+        generateAndSendEmail(mail_object.text);
+      } else {
+        console.log("Email Not From Verified Sender");
+      }
+    
       res.writeHead(200, {'content-type': 'text/plain'});
       res.end();
     });
