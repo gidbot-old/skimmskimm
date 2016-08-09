@@ -11,6 +11,8 @@ var imap = {
       tlsOptions: { rejectUnauthorized: false }
 };
 
+console.log("Server.js Loaded");
+
 notifier(imap).on('mail',function (mail){
   console.log("Emai Received"); 
   console.log("From: " , mail.from);
