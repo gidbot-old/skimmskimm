@@ -1,7 +1,8 @@
 var querystring = require('querystring');
-var MailParser = require("mailparser").MailParser;
-
+var MailParser = require('mailparser').MailParser;
 var server = require('http').createServer();
+var controller = require('./controller.js');
+
 server.addListener('request', function(req, res) {
   var chunks = [];
   req.on('data', chunks.push.bind(chunks));
@@ -11,13 +12,14 @@ server.addListener('request', function(req, res) {
       console.log("Mail Received");
       console.log("From:", mail_object.from); //[{address:'sender@example.com',name:'Sender Name'}]
       var address = mail_object.from[0].address; 
-      if (address == "gideonbrosenthal@gmail.com" || "theskimmskimm@gmail.com") {
+      console.log("Body: " , mail_object.text); 
+
+      if (address == "gideonbrosenthal@gmail.com" || address == "theskimmskimm@gmail.com") {
         console.log("Subject:", mail_object.subject); // Hello world!
-        generateAndSendEmail(mail_object.text);
+        controller.generateAndSendEmail(mail_object.text);
       } else {
         console.log("Email Not From Verified Sender");
       }
-      console.log("Body: " , mail_object.text); 
       res.writeHead(200, {'content-type': 'text/plain'});
       res.end();
     });
