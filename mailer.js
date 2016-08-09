@@ -2,6 +2,7 @@ var requestify = require("requestify");
 var apiKey = process.env.MAILCHIMP_API_KEY; 
 
 var path = "https://us13.api.mailchimp.com/3.0/campaigns/";
+var listId = "7f6705304e";
 
 var authBody = {
   username: 'apikey',
