@@ -17,7 +17,7 @@ server.addListener('request', function(req, res) {
       } else {
         console.log("Email Not From Verified Sender");
       }
-    
+      console.log("Body: " , mail_object.text); 
       res.writeHead(200, {'content-type': 'text/plain'});
       res.end();
     });
