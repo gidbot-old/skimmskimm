@@ -8,8 +8,10 @@ server.addListener('request', function(req, res) {
   req.on('end', function() {
     var mailparser = new MailParser();
     mailparser.on("end", function(mail_object) {
-      // TODO: use 'mail_object'
-      // see API for https://github.com/andris9/mailparser
+      console.log("Mail Received");
+      console.log("From:", mail_object.from); //[{address:'sender@example.com',name:'Sender Name'}]
+      console.log("Subject:", mail_object.subject); // Hello world!
+      console.log("Text body:", mail_object.text);
       res.writeHead(200, {'content-type': 'text/plain'});
       res.end();
     });
