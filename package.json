@@ -2,20 +2,21 @@
   "name": "digestdigest",
   "version": "1.0.0",
   "description": "It's a digest digest ",
-  "main": "server.js",
+  "main": "app.js",
   "engines": {
     "node": "6.2.2"
   },
   "dependencies": {
     "follow-redirects": "^0.2.0",
     "imap": "^0.8.17",
-    "jsdom": "^9.4.1",
     "jquery": "^3.1.0",
+    "jsdom": "^9.4.1",
+    "mail-listener2": "^0.1.8",
     "mail-notifier": "^0.3.0",
     "mailchimp": "^1.2.0",
-    "mail-listener2": "^0.1.8",
-    "mailin": "^3.0.3",
     "mailgun-js": "^0.7.11",
+    "mailin": "^3.0.3",
+    "mailparser": "^0.6.1",
     "requestify": "^0.1.17",
     "sendgrid": "^3.0.11",
     "smtpapi": "^1.2.0",
@@ -24,7 +25,7 @@
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node app.js"
   },
   "author": "gidbot",
   "license": "MIT"
