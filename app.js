@@ -1,7 +1,7 @@
 var querystring = require('querystring');
 var MailParser = require("mailparser").MailParser;
 
-var server = require('https').createServer();
+var server = require('http').createServer();
 server.addListener('request', function(req, res) {
   var chunks = [];
   req.on('data', chunks.push.bind(chunks));
@@ -18,6 +18,6 @@ server.addListener('request', function(req, res) {
     mailparser.end();
   });
 });
-var port = process.env.PORT || 443; 
+var port = process.env.PORT || 3000;
 console.log(' [*] Listening on 0.0.0.0:' + port);
 server.listen(port, '0.0.0.0');
