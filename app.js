@@ -10,12 +10,11 @@ server.addListener('request', function(req, res) {
     var mailparser = new MailParser();
     mailparser.on("end", function(mail_object) {
       console.log("Mail Received");
-      console.log("From:", mail_object.from); //[{address:'sender@example.com',name:'Sender Name'}]
+      console.log("From:", mail_object.from); 
       var address = mail_object.from[0].address; 
-      console.log("Body: " , mail_object.text); 
 
-      if (address == "gideonbrosenthal@gmail.com" || address == "theskimmskimm@gmail.com") {
-        console.log("Subject:", mail_object.subject); // Hello world!
+      if (address == "gideonbrosenthal@gmail.com" || address == "arvydas2404@gmail.com") {
+        console.log("Subject:", mail_object.subject); 
         controller.generateAndSendEmail(mail_object.text);
       } else {
         console.log("Email Not From Verified Sender");
