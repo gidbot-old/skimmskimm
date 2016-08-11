@@ -39,8 +39,10 @@ function generateHtmlEmail (input) {
 	html += "Something with <a target='_blank' href ='" + topStory.link+"'>" + topStory.importantWords[0].match +"</a> <br> "; 
     html += "<h2> Other Stores: </h2>"; 
 	for (var story of input.otherStories) { 
-		var story = "Some stuff happend with <a target='_blank' href ='" + story.link+"'>" + story.importantWords[0].match +"</a> <br> "; 
-		html+= "" + story + "<br>";
+		if (story.importantWords[0]) {
+			var story = "Some stuff happend with <a target='_blank' href ='" + story.link+"'>" + story.importantWords[0].match +"</a> <br> "; 
+			html+= "" + story + "<br>";			
+		}
 	}
 
 	html += "</body> </html>";
