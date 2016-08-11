@@ -111,7 +111,7 @@ function getImportantWords (search, callback) {
   .then(function (res) {
     var entities = res.response.entities; 
     var results = []; 
-    if (entities) {
+    if (entities && entities.length > 0) {
       for (var i = 0; i < 2; i++) {
         if (entities[i]) {
           results.push({ 
