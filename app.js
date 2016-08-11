@@ -13,7 +13,7 @@ server.addListener('request', function(req, res) {
       console.log("From:", mail_object.from); 
       var address = mail_object.from[0].address; 
 
-      if (address == "gideonbrosenthal@gmail.com" || address == "arvydas2404@gmail.com") {
+      if (address == "gideonbrosenthal@gmail.com" || address == "dailyskimm@morning7.theskimm.com") {
         console.log("Subject:", mail_object.subject); 
         controller.generateAndSendEmail(mail_object.text);
       } else {
