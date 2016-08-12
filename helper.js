@@ -22,17 +22,14 @@ var parseHtml = function (url, callback) {
         html: topStoryHtml.split(". ").slice(0, 2)
       }
       //ToDo: Check if there's a number
-      getOtherStories(function (otherStories) {
 
         var info = {
           quoteOfTheDay: quoteOfTheDay, 
           topStory: topStory,
-          otherStories: otherStories
+          otherStories: getOtherStories
         }
 
         callback(info);          
-      });
-      
 
     }
   );
@@ -70,7 +67,7 @@ function getRepeatAfterMe () {
   return false; 
 } 
 
-function getOtherStories (callback) {
+function getOtherStories () {
   var current = getRepeatAfterMe().next(); 
   var results = []; 
   while (current && current.length > 0 && current.prop("tagName") != "H1") {
@@ -79,6 +76,7 @@ function getOtherStories (callback) {
     }
     current = current.next();
   }  
+  return results;
 }
 
 function addImportantWords (stories, callback) {
