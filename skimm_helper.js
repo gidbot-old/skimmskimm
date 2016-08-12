@@ -155,7 +155,7 @@ function getImportantWords (search, callback) {
 }
 
 var searchLinkRegExp = function () {
-  return new RegExp(/View it in your browser.(\n)*.+?(?=>)/i)
+  return /View it in your browser.(\n)*.+?(?=>)/i;
 } 
 exports.getLinkRegExp = searchLinkRegExp;
 exports.parseHtml = parseHtml; 

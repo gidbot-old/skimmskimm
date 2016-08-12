@@ -19,7 +19,7 @@ var parseHtml = function (url, callback) {
 }
 
 var searchLinkRegExp = function () {
-  return new RegExp(/on the web(\n)*.+?(?=>)/i)
+  return /on the web(\n)*.+?(?=>)/i;
 } 
 exports.getLinkRegExp = searchLinkRegExp;
 exports.parseHtml = parseHtml;

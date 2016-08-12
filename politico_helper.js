@@ -29,7 +29,7 @@ function returnHTMLForTag (elem, tag) {
 }
 
 var searchLinkRegExp = function () {
-  return new RegExp(/View online version(\n)*.+?(?=>)/i)
+  return /View online version(\n)*.+?(?=>)/i;
 } 
 exports.getLinkRegExp = searchLinkRegExp;
 exports.parseHtml = parseHtml;
