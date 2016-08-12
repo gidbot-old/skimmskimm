@@ -21,7 +21,7 @@ server.addListener('request', function(req, res) {
       var service = addresses[address]; 
       if (service) {
         console.log("Subject:", mail_object.subject); 
-        controller.parseHtml(mail_object.text, service, null, function (html) {
+        controller.parseHtml(mail_object.text, service, false, function (html) {
           console.log(html)
         });
       } else {
