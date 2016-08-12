@@ -6,7 +6,7 @@ var textRazor = new TextRazor("b65f3fee73329eb4a581058a011c8b022868367e0385cd279
 var window; 
 
 var parseHtml = function (url, callback) {
-  console.log("Parsing HTML");
+  console.log("Parsing the Skimm");
   jsdom.env(
     url,
     ["http://code.jquery.com/jquery.js"],
@@ -22,16 +22,23 @@ var parseHtml = function (url, callback) {
         html: topStoryHtml.split(". ").slice(0, 2)
       }
       //ToDo: Check if there's a number
+      // getOtherStories(function (otherStories) {
+      //   var info = {
+      //     quoteOfTheDay: quoteOfTheDay, 
+      //     topStory: topStory,
+      //     otherStories: otherStories
+      //   }
 
-      getOtherStories(function (otherStories) {
-        var info = {
-          quoteOfTheDay: quoteOfTheDay, 
-          topStory: topStory,
-          otherStories: otherStories
-        }
+      //   callback(info);          
+      // });
 
-        callback(info);          
-      });
+      var info = {
+        quoteOfTheDay: quoteOfTheDay, 
+        topStory: topStory
+      }
+      var htmlForEmail = generateHtmlForEmail(info); 
+      callback(htmlForEmail);
+
     }
   );
 }
@@ -80,6 +87,31 @@ function getOtherStories (callback) {
   callback(results);
 }
 
+
+function generateHtmlForEmail (input) {
+  console.log("Generating Email"); 
+  console.log("Input: " , input); 
+  var topStory = input.topStory; 
+  var html = "<h2 style='text-align: center;> The Skimm: </h2> <span> ";
+  html += "<span id='quote-of-the-day'>" + input.quoteOfTheDay + " </span>";
+  html += topStory.html[0];
+  if (topStory.html[1]) {
+    html += ". " + topStory.html[1];
+  }
+  html += "</span>";
+  return html; 
+  
+  //   html += "<h2> Other Stores: </h2>"; 
+  // for (var i = 0; i < input.otherStories.length; i++) { 
+  //   var story = input.otherStories[i];
+  //   html+= story[0];  
+  //   if (story[1]) {
+  //     html+= ". " + story[1] + "<br>";      
+  //   }     
+  // }
+
+}
+
 function addImportantWords (stories, callback) {
   function recurse (currentIndex) {
     if (currentIndex < stories.length) {
@@ -122,4 +154,8 @@ function getImportantWords (search, callback) {
   });
 }
 
+var searchLinkRegExp = function () {
+  return new RegExp(/View it in your browser.(\n)*.+?(?=>)/i)
+} 
+exports.getLinkRegExp = searchLinkRegExp;
 exports.parseHtml = parseHtml; 

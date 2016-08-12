@@ -1,8 +1,18 @@
-var helper = require('./helper')
+var skimm_helper = require('./skimm_helper')
+	, politico_helper = require('./politico_helper')
+	, nytimes_helper = require('./nytimes_helper')
 	, mailer = require('./mailer');
 
-function getBrowserUrl (text) {
-  var raw = text.match(/View it in your browser.(\n)*.+?(?=>)/i);
+function helperFactory (key) {
+	var factory = {
+		"skimm": skimm_helper,
+		"politico": politico_helper,
+		"nytimes": nytimes_helper
+	}
+	return factory[key]; 
+}
+function getBrowserUrl (text, regexp) {
+  var raw = text.match(regexp);
   if (!raw) {
   	return false;
   } else { 
@@ -13,46 +23,24 @@ function getBrowserUrl (text) {
   return url;
 }
 
-function generateAndSendEmail(text) {
-	var url = getBrowserUrl(text); 
+function parseHtml(text, service, url2, callback) {
+	console.log("Text/HTML Input: " , text); 
+	var helper = helperFactory(service); 
+	var url = getBrowserUrl(text, helper.getLinkRegExp); 
+	url = (url2) ? url2 : url;
 	if (url) {
 		console.log("Got URL, Initiating Script")
-		helper.parseHtml(url, function (json) {
-			console.log("HTML Parsed");
-			var subject = "theSkimmSkimm for " + getDate();
-			var body = generateHtmlEmail(json); 
-			mailer.sendEmail(subject, body, function (response) {
-				console.log("Digest " + response); 
-			});
+		helper.parseHtml(url, function (html) {
+			console.log("Done Parsing");
+			console.log(html);
+			callback(html);
 		});
 	} else {
 		console.log("Unable to Find Url");
 	}
 }
 
-exports.generateAndSendEmail = generateAndSendEmail; 
-
-function generateHtmlEmail (input) {
-	console.log("Generating Email"); 
-	console.log("Input: " , input); 
-	var topStory = input.topStory; 
-	var html = "<html> <body style='text-align: center;'> <h1> Top Story: </h1> ";
-	html += topStory.html[0];
-	if (topStory.html[1]) {
-		html += ". " + topStory.html[1];
-	}
-    html += "<h2> Other Stores: </h2>"; 
-	for (var i = 0; i < input.otherStories.length; i++) { 
-		var story = input.otherStories[i];
-		html+= story[0];	
-		if (story[1]) {
-			html+= ". " + story[1] + "<br>";			
-		} 		
-	}
-
-	html += "</body> </html>";
-	return html; 
-}
+exports.parseHtml = parseHtml; 
 
 function getDate () {
 	var today = new Date();
