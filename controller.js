@@ -39,14 +39,14 @@ function generateHtmlEmail (input) {
 	var html = "<html> <body style='text-align: center;'> <h1> Top Story: </h1> ";
 	html += topStory.html[0];
 	if (topStory.html[1]) {
-		html += topStory.html[1];
+		html += ". " + topStory.html[1];
 	}
     html += "<h2> Other Stores: </h2>"; 
 	for (var i = 0; i < input.otherStories.length; i++) { 
 		var story = input.otherStories[i];
 		html+= story[0];	
 		if (story[1]) {
-			html+= story[1] + "<br>";			
+			html+= ". " + story[1] + "<br>";			
 		} 		
 	}
 
