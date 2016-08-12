@@ -73,7 +73,7 @@ function getOtherStories (callback) {
   var results = []; 
   while (current && current.length > 0 && current.prop("tagName") != "H1") {
     if (current.hasClass("skimm-p")) {
-      results.push(current.html().split().slice(0, 2));
+      results.push(current.html().split(". ").slice(0, 2));
     }
     current = current.next();
   }  
