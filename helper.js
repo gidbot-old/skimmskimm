@@ -15,36 +15,34 @@ var parseHtml = function (url, callback) {
       var quoteOfTheDay = window.$("#quote-of-the-day").first().next().html();
 
       var topStoryElement = window.$("#top-story").first(); 
-      var topStoryText = returnTextForTag(topStoryElement, "P"); 
+      var topStoryHtml = returnHTMLForTag(topStoryElement, "P"); 
      
       var topStory = { 
-        headline: topStoryElement.text(), 
-        link: findFirstLink(topStoryElement)
+        headline: topStoryElement.text(),
+        html: topStoryHtml.split(". ").slice(0, 2)
       }
       //ToDo: Check if there's a number
-      getImportantWords(topStoryText, function (topStoryWords) {
-        topStory.importantWords = topStoryWords;
-        getOtherStories(function (otherStories) {
+      topStory.importantWords = topStoryWords;
+      getOtherStories(function (otherStories) {
 
-          var info = {
-            quoteOfTheDay: quoteOfTheDay, 
-            topStory: topStory,
-            otherStories: otherStories
-          }
+        var info = {
+          quoteOfTheDay: quoteOfTheDay, 
+          topStory: topStory,
+          otherStories: otherStories
+        }
 
-          callback(info);          
-        });
-        
+        callback(info);          
       });
+      
 
     }
   );
 }
 
-function returnTextForTag (elem, tag) { 
+function returnHTMLForTag (elem, tag) { 
   for (var i = 0; i < 10; i++) {
     if (elem.prop("tagName") == tag) {
-      return elem.text();
+      return elem.html();
     }
     elem = elem.next();
   } 
@@ -78,17 +76,10 @@ function getOtherStories (callback) {
   var results = []; 
   while (current && current.length > 0 && current.prop("tagName") != "H1") {
     if (current.hasClass("skimm-p")) {
-      var story = {
-        text: current.text(), 
-        link: findFirstLink(current)
-      }
-      results.push(story);
+      results.push(current.html().split().slice(0, 2));
     }
     current = current.next();
-  }
-  addImportantWords(results, function (finalStories) {
-    callback(finalStories); 
-  }); 
+  }  
 }
 
 function addImportantWords (stories, callback) {

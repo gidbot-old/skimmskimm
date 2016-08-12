@@ -36,13 +36,16 @@ function generateHtmlEmail (input) {
 	console.log("Generating Email"); 
 	var topStory = input.topStory; 
 	var html = "<html> <body style='text-align: center;'> <h1> Top Story: </h1> ";
-	html += "Something with <a target='_blank' href ='" + topStory.link+"'>" + topStory.importantWords[0].match +"</a> <br> "; 
+	html += topStory.html[0];
+	if (topStory.html[1]) {
+		html += topStory.html[1];
+	}
     html += "<h2> Other Stores: </h2>"; 
 	for (var story of input.otherStories) { 
-		if (story.importantWords[0]) {
-			var story = "Some stuff happend with <a target='_blank' href ='" + story.link+"'>" + story.importantWords[0].match +"</a> <br> "; 
-			html+= "" + story + "<br>";			
-		}
+		html+= story[0];	
+		if (story[1]) {
+			html+= story[1] + "<br>";			
+		} 		
 	}
 
 	html += "</body> </html>";
