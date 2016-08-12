@@ -24,8 +24,9 @@ function getBrowserUrl (text, regexp) {
 }
 
 function parseHtml(text, service, url2, callback) {
-	console.log("Text/HTML Input: " , text); 
 	var helper = helperFactory(service); 
+	console.log("Service: ", service);
+	console.log("URL2", url2);
 	var url = getBrowserUrl(text, helper.getLinkRegExp); 
 	url = (url2) ? url2 : url;
 	if (url) {
