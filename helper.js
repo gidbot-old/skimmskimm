@@ -22,7 +22,6 @@ var parseHtml = function (url, callback) {
         html: topStoryHtml.split(". ").slice(0, 2)
       }
       //ToDo: Check if there's a number
-      topStory.importantWords = topStoryWords;
       getOtherStories(function (otherStories) {
 
         var info = {
