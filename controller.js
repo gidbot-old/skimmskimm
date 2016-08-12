@@ -28,7 +28,7 @@ function parseHtml(text, service, url2, callback) {
 	console.log("Service: ", service);
 	console.log("URL2", url2);
 	console.log("RegExp", helper.getLinkRegExp); 
-	var url = getBrowserUrl(text, helper.getLinkRegExp); 
+	var url = getBrowserUrl(text, helper.getLinkRegExp()); 
 	url = (url2) ? url2 : url;
 	if (url) {
 		console.log("Got URL, Initiating Script")
