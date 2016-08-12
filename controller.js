@@ -34,6 +34,7 @@ exports.generateAndSendEmail = generateAndSendEmail;
 
 function generateHtmlEmail (input) {
 	console.log("Generating Email"); 
+	console.log("Input: " , input); 
 	var topStory = input.topStory; 
 	var html = "<html> <body style='text-align: center;'> <h1> Top Story: </h1> ";
 	html += topStory.html[0];
@@ -41,7 +42,8 @@ function generateHtmlEmail (input) {
 		html += topStory.html[1];
 	}
     html += "<h2> Other Stores: </h2>"; 
-	for (var story of input.otherStories) { 
+	for (var i = 0; i < input.otherStories.length; i++) { 
+		var story = input.otherStories[i];
 		html+= story[0];	
 		if (story[1]) {
 			html+= story[1] + "<br>";			
