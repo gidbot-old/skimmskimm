@@ -23,7 +23,7 @@ var parseHtml = function (url, callback) {
       }
       //ToDo: Check if there's a number
 
-      getOtherStories(function (otherStories)
+      getOtherStories(function (otherStories) {
         var info = {
           quoteOfTheDay: quoteOfTheDay, 
           topStory: topStory,
